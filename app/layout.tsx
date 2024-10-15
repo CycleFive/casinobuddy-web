@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 import { ClerkProvider } from '@clerk/nextjs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './globals.css';
-import PageHeader from '@/components/page-header';
+import PageHeader from './components/page-header';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
