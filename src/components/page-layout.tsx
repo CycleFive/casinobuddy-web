@@ -1,8 +1,29 @@
 import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from '@clerk/clerk-react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Ul } from './list';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  > main {
+    flex-grow: 1;
+  }
+`;
+
+const LeftHeader = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const MainNav = styled(Nav)`
   display: flex;
@@ -24,25 +45,36 @@ interface Props {
 
 const PageLayout: FC<Props> = function PageLayout({ children }) {
   return (
-    <>
+    <Wrapper>
       <Navbar as="header">
-        <Container fluid>
-          <Navbar.Brand as={Link} to="/">Casinobuddy</Navbar.Brand>
-          <Navbar.Toggle aria-controls="main-navbar-nav" />
-          <Navbar.Collapse id="main-navbar-nav">
-            <MainNav as="nav">
-              <MainNavList>
-                <Nav.Item as="li">
-                  <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
-                </Nav.Item>
-              </MainNavList>
-            </MainNav>
-          </Navbar.Collapse>
+        <Container className="justify-content-between" fluid>
+          <LeftHeader>
+            <Navbar.Brand as={Link} to="/">Casinobuddy</Navbar.Brand>
+            <Navbar.Toggle aria-controls="main-navbar-nav" />
+            <Navbar.Collapse id="main-navbar-nav">
+              <MainNav as="nav">
+                <ul>
+                  <Nav.Item as="li">
+                    <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                  </Nav.Item>
+                </ul>
+              </MainNav>
+            </Navbar.Collapse>
+          </LeftHeader>
+
+          <div>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
         </Container>
       </Navbar>
 
       <main>{children}</main>
-    </>
+    </Wrapper>
   );
 };
 
