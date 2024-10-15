@@ -29,6 +29,7 @@ const ToastList = styled(Ul)`
 
 interface DispatchOptions {
   title?: string;
+  duration?: number;
 }
 type Dispatch = (content: string, options?: DispatchOptions) => void;
 
@@ -79,7 +80,7 @@ export const ToastProvider: FC<Props> = function ToastProvider({ children }) {
           variant,
           timeout: setTimeout(() => {
             handleClose(content);
-          }, DEFAULT_TIMEOUT),
+          }, options?.duration || DEFAULT_TIMEOUT),
         })),
     );
   }

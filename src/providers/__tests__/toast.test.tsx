@@ -127,3 +127,25 @@ test('opens multiple messages', async () => {
   expect(screen.queryByText('yay')).toBeInTheDocument();
   expect(screen.queryByText('boo')).toBeInTheDocument();
 });
+
+test('closes after duration elapses', async () => {
+  const TestComponent: FC = function TestComponent() {
+    const toast = useToast();
+    return (
+      <button type="button" onClick={() => toast.success('quip', { duration: 100 })}>
+        Dispatch
+      </button>
+    );
+  };
+
+  render(<TestComponent />);
+  await userEvent.click(screen.getByText('Dispatch'));
+  expect(screen.queryByText('quip')).toBeInTheDocument();
+
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      expect(screen.queryByText('quip')).not.toBeInTheDocument();
+      resolve();
+    }, 150);
+  });
+});
