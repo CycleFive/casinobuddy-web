@@ -1,8 +1,15 @@
 import React, { FC } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Pages from './pages';
+import PageLayout from './components/page-layout';
 
 const App: FC = function App() {
   return (
-    <h1>&lt;App /&gt;</h1>
+    <Router>
+      <PageLayout>
+        <Pages />
+      </PageLayout>
+    </Router>
   );
 };
 
