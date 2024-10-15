@@ -31,7 +31,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
           <PageHeader />
-          <main>{children}</main>
+          <main className="pt-4">{children}</main>
         </body>
       </html>
     </ClerkProvider>
