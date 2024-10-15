@@ -2,21 +2,19 @@ import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Ul } from './list';
 
 const MainNav = styled(Nav)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
 
-  ul {
-    display: flex;
-    list-style: none;
-    margin-bottom: 0;
-    padding-left: 0;
+const MainNavList = styled(Ul)`
+  display: flex;
 
-    > li:not(:last-of-type) {
-      margin-right: 1rem;
-    }
+  > li:not(:last-of-type) {
+    margin-right: 1rem;
   }
 `;
 
@@ -33,11 +31,11 @@ const PageLayout: FC<Props> = function PageLayout({ children }) {
           <Navbar.Toggle aria-controls="main-navbar-nav" />
           <Navbar.Collapse id="main-navbar-nav">
             <MainNav as="nav">
-              <ul>
+              <MainNavList>
                 <Nav.Item as="li">
                   <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                 </Nav.Item>
-              </ul>
+              </MainNavList>
             </MainNav>
           </Navbar.Collapse>
         </Container>
