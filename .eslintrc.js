@@ -32,5 +32,24 @@ module.exports = {
         strict: [2, 'global'],
       },
     },
+    {
+      files: [
+        '**/__tests__/**',
+        '**/__mocks__/**',
+        '**/test-utils/**',
+      ],
+      plugins: ['jest'],
+      extends: [
+        'airbnb',
+        'airbnb-typescript',
+        'plugin:jest/recommended',
+      ],
+      env: {
+        'jest/globals': true,
+      },
+      rules: {
+        'import/no-extraneous-dependencies': [2, { devDependencies: true }],
+      },
+    },
   ],
 };

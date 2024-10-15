@@ -8,6 +8,7 @@ import {
   UserButton,
 } from '@clerk/clerk-react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Ul } from './list';
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,16 +29,13 @@ const MainNav = styled(Nav)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
 
-  ul {
-    display: flex;
-    list-style: none;
-    margin-bottom: 0;
-    padding-left: 0;
+const MainNavList = styled(Ul)`
+  display: flex;
 
-    > li:not(:last-of-type) {
-      margin-right: 1rem;
-    }
+  > li:not(:last-of-type) {
+    margin-right: 1rem;
   }
 `;
 
