@@ -1,10 +1,17 @@
 'use strict';
 
 const path = require('node:path');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const Html = require('html-webpack-plugin');
 const MiniCssExtract = require('mini-css-extract-plugin');
 const Brotli = require('brotli-webpack-plugin');
+
+const env = dotenv.config().parsed;
+if (!env.VITE_CLERK_PUBLISHABLE_KEY) {
+  throw new Error('Invalid .env file. Ensure you\'ve copied .env.example to .env');
+}
 
 const base = {
   context: path.resolve('src'),
@@ -56,6 +63,13 @@ const base = {
       inject: 'head',
     }),
     new MiniCssExtract(),
+    new webpack.DefinePlugin({
+      process: JSON.stringify({
+        env: {
+          VITE_CLERK_PUBLISHABLE_KEY: env.VITE_CLERK_PUBLISHABLE_KEY,
+        },
+      }),
+    }),
   ],
 };
 
