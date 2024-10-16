@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ClerkProvider } from '@clerk/clerk-react';
 import { ToastProvider } from './providers/toast';
+import { ApiClientProvider } from './components/api-client-interceptors';
 import Pages from './pages';
 import PageLayout from './components/page-layout';
 import { VITE_CLERK_PUBLISHABLE_KEY } from './env';
