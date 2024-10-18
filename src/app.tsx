@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ClerkProvider } from '@clerk/clerk-react';
+import { QueryClientProvider } from '@tanstack/react-query';
+import queryClient from './query-client';
 import { ToastProvider } from './providers/toast';
-import ApiClientInterceptors from './components/api-client-interceptors';
 import Pages from './pages';
 import PageLayout from './components/page-layout';
 import { VITE_CLERK_PUBLISHABLE_KEY } from './env';
@@ -12,10 +13,11 @@ const App: FC = function App() {
     <ToastProvider>
       <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY} afterSignOutUrl="/">
         <Router>
-          <PageLayout>
-            <Pages />
-          </PageLayout>
-          <ApiClientInterceptors />
+          <QueryClientProvider client={queryClient}>
+            <PageLayout>
+              <Pages />
+            </PageLayout>
+          </QueryClientProvider>
         </Router>
       </ClerkProvider>
     </ToastProvider>
