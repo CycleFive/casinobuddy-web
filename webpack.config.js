@@ -66,6 +66,7 @@ const base = {
     new webpack.DefinePlugin({
       process: JSON.stringify({
         env: {
+          NODE_ENV: process.env.NODE_ENV,
           VITE_CLERK_PUBLISHABLE_KEY: env.VITE_CLERK_PUBLISHABLE_KEY,
         },
       }),
