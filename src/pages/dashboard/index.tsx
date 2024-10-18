@@ -1,10 +1,11 @@
 import React, { useEffect, useState, FC } from 'react';
 import { Container } from 'react-bootstrap';
-import apiClient from '../api-client';
-import useToast from '../providers/toast';
-import Loading from '../components/loading';
+import apiClient from '../../api-client';
+import useToast from '../../providers/toast';
+import Loading from '../../components/loading';
+import SelectCasino from './components/select-casino';
 
-interface Casino {
+export interface Casino {
   readonly id: string;
   name: string;
   url: string;
@@ -19,7 +20,6 @@ interface CasinoListRes {
 
 const DashboardPage: FC = function DashboardPage() {
   const toast = useToast();
-  const [isLoading, setIsLoading] = useState(true);
   const [casinoList, setCasinoList] = useState<Casino[]>();
 
   useEffect(() => {
@@ -28,22 +28,20 @@ const DashboardPage: FC = function DashboardPage() {
         setCasinoList(res.data.casinos);
       })
       .catch((ex) => {
+        console.error(ex);
         toast.error(ex.message, { title: 'Unable to fetch Casino List' });
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
   }, []);
 
   return (
     <Container>
       <h1>Dashboard</h1>
-      {isLoading ? (
+      {!casinoList ? (
         <Loading />
       ) : (
         <>
           <h2>Casinos</h2>
-          <div />
+          <SelectCasino casinos={casinoList} />
         </>
       )}
     </Container>

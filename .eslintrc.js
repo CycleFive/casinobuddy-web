@@ -16,6 +16,7 @@ module.exports = {
         project: './tsconfig.json',
       },
       rules: {
+        'no-console': 0,
         'prefer-destructuring': 0,
         'react/jsx-one-expression-per-line': 0,
         'react/require-default-props': 0,
